@@ -57,7 +57,7 @@ class Edition(models.Model):
 
 class Ecriture(models.Model):
     auteur = models.TextField(primary_key=True)  # The composite primary key (auteur, n_enregistrement) found, that is not supported. The first column is selected.
-    n_enregistrement = models.IntegerField()
+    n_enregistrement = models.ForeignKey('gestion.Doc', on_delete=models.DO_NOTHING, db_column='n_enregistrement')
 
     class Meta:
         managed = False
@@ -97,3 +97,16 @@ class Source(models.Model):
     class Meta:
         managed = False
         db_table = 'source'
+
+
+class Admin(models.Model):
+    nom = models.TextField()
+    email = models.TextField()
+    login = models.TextField()
+    pass_field = models.TextField(db_column='pass')  # Field renamed because it was a Python reserved word.
+    destination = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'admin'
+

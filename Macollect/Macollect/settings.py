@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'users',
     'rendement',
     'Main',
+    'verification',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
