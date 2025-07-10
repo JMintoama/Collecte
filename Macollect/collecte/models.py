@@ -7,11 +7,18 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+from django.db import models
 
 class Collecte(models.Model):
-    nomrc = models.TextField(primary_key=True)  # The composite primary key (nomrc, n_enregistrement) found, that is not supported. The first column is selected.
+    nomrc = models.TextField(primary_key=True)
     n_enregistrement = models.IntegerField()
-    datsaisi_c = models.DateField()
+    datsaisi_c = models.DateField(auto_now_add=True)  # se remplit automatiquement à la création
+
+    def save(self, *args, **kwargs):
+        if not self.n_enregistrement:
+            last = Collecte.objects.filter(nomrc=self.nomrc).order_by('-n_enregistrement').first()
+            self.n_enregistrement = (last.n_enregistrement + 1) if last else 1
+        super().save(*args, **kwargs)
 
     class Meta:
         managed = False

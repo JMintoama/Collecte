@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.collecte_home, name='collecte_home'),
-    # Add more URL patterns as needed for the collecte app
+    path('ajouter/', views.ajouter_collecte, name='ajouter_collecte'),
 ]

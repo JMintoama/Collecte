@@ -9,7 +9,10 @@
     <!-- templates/collecte/home.html -->
     {% extends "base.html" %}
     {% block content %}
-    <h2>Bienvenue dans le module Collecte</h2>
+    <h2>Faire un enregistrement</h2>
+    <ul>
+        <li><a href="{% url 'ajouter_collecte' %}">Ajouter</a></li>
+    </ul>
     {% endblock %}
 
 </body>
