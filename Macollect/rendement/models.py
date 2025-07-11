@@ -9,8 +9,7 @@ from django.db import models
 
 
 class Control(models.Model):
-    nomc = models.TextField(primary_key=True)  # The composite primary key (nomc, n_enregistrement) found, that is not supported. The first column is selected.
-    dat_ctrl = models.DateField()
+    nomc = models.TextField()  
     observation = models.TextField(blank=True, null=True)
     retourne = models.TextField()
     dat_retour = models.DateField(blank=True, null=True)
@@ -22,6 +21,7 @@ class Control(models.Model):
     class Meta:
         managed = False
         db_table = 'control'
+        unique_together = ('nomc','n_enregistrement')
 
 
 class Controleur(models.Model):

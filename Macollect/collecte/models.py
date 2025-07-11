@@ -9,26 +9,26 @@ from django.db import models
 
 from django.db import models
 
-class Collecte(models.Model):
+class Collecteur(models.Model):
     nomrc = models.TextField(primary_key=True)
-    n_enregistrement = models.IntegerField()
-    datsaisi_c = models.DateField(auto_now_add=True)  # se remplit automatiquement à la création
-
-    def save(self, *args, **kwargs):
-        if not self.n_enregistrement:
-            last = Collecte.objects.filter(nomrc=self.nomrc).order_by('-n_enregistrement').first()
-            self.n_enregistrement = (last.n_enregistrement + 1) if last else 1
-        super().save(*args, **kwargs)
-
+    
     class Meta:
         managed = False
-        db_table = 'collecte'
-# Unable to inspect table 'collecteur'
-# The error was: Table collecteur does not exist (empty pragma).
+        db_table = 'Collecteur'
 
+class Collecte(models.Model):
+    id = models.AutoField(primary_key=True)
+    nomrc = models.CharField(max_length=255)
+    n_enregistrement = models.IntegerField()
+    datsaisi_c = models.DateField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'collecte'
+        unique_together = ('nomrc','n_enregistrement')
 
 class Indexation(models.Model):
-    nomi = models.TextField(primary_key=True)  # The composite primary key (nomi, n_enregistrement) found, that is not supported. The first column is selected.
+    id = models.AutoField(primary_key=True)
+    nomi = models.TextField()  
     n_enregistrement = models.IntegerField()
     dat_reception = models.DateField()
     dat_indexation = models.DateField()
@@ -38,6 +38,7 @@ class Indexation(models.Model):
     class Meta:
         managed = False
         db_table = 'indexation'
+        unique_together = ('nomi','n_enregistrement')
 
 
 class Indexeur(models.Model):

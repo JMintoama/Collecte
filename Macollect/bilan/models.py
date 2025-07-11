@@ -34,7 +34,7 @@ class Suiveur(models.Model):
 
 
 class Vue(models.Model):
-    controleur = models.TextField(primary_key=True)  # The composite primary key (controleur, n_enregistrement) found, that is not supported. The first column is selected.
+    controleur = models.TextField()  
     n_enregistrement = models.IntegerField()
     dat_ctrl = models.DateField()
     visa = models.TextField()
@@ -43,3 +43,4 @@ class Vue(models.Model):
     class Meta:
         managed = False
         db_table = 'vue'
+        unique_together = ('controleur','n_enregistrement')

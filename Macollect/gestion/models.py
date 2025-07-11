@@ -8,6 +8,17 @@
 from django.db import models
 
 
+class Admin(models.Model):
+    nom = models.TextField()
+    email = models.TextField()
+    login = models.TextField()
+    pass_field = models.TextField(db_column='pass')  # Field renamed because it was a Python reserved word.
+    destination = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'admin'
+
 class Doc(models.Model):
     n_enregistrement = models.AutoField(primary_key=True)
     titre = models.TextField()
@@ -45,7 +56,7 @@ class Editeur(models.Model):
 
 
 class Edition(models.Model):
-    editeur = models.TextField(primary_key=True)  # The composite primary key (editeur, n_enregistrement) found, that is not supported. The first column is selected.
+    editeur = models.TextField() 
     n_enregistrement = models.IntegerField()
     date_edition = models.DateField()
     ville_edition = models.TextField(blank=True, null=True)
@@ -53,15 +64,17 @@ class Edition(models.Model):
     class Meta:
         managed = False
         db_table = 'edition'
+        unique_together = ('editeur','n_enregistrement')
 
 
 class Ecriture(models.Model):
-    auteur = models.TextField(primary_key=True)  # The composite primary key (auteur, n_enregistrement) found, that is not supported. The first column is selected.
+    auteur = models.TextField()  
     n_enregistrement = models.ForeignKey('gestion.Doc', on_delete=models.DO_NOTHING, db_column='n_enregistrement')
 
     class Meta:
         managed = False
         db_table = 'ecriture'
+        unique_together = ('auteur','n_enregistrement')
 
 
 class Auteur(models.Model):
@@ -80,17 +93,6 @@ class Depot(models.Model):
         db_table = 'depot'
 
 
-class Fournit(models.Model):
-    source = models.TextField(primary_key=True)  # The composite primary key (source, n_enregistrement) found, that is not supported. The first column is selected.
-    n_enregistrement = models.IntegerField()
-    date_reception = models.DateField()
-    obligation = models.TextField()
-
-    class Meta:
-        managed = False
-        db_table = 'fournit'
-
-
 class Source(models.Model):
     source = models.TextField(primary_key=True)
 
@@ -99,14 +101,14 @@ class Source(models.Model):
         db_table = 'source'
 
 
-class Admin(models.Model):
-    nom = models.TextField()
-    email = models.TextField()
-    login = models.TextField()
-    pass_field = models.TextField(db_column='pass')  # Field renamed because it was a Python reserved word.
-    destination = models.TextField()
+class Fournit(models.Model):
+    source = models.TextField()  
+    n_enregistrement = models.IntegerField()
+    date_reception = models.DateField()
+    obligation = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'admin'
+        db_table = 'fournit'
+        unique_together = ('source','n_enregistrement')
 
