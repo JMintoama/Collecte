@@ -1,0 +1,26 @@
+{% load static %}
+<header class="bg-primary text-white py-5">
+    <div class="container-lg">
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <a href="/" class="d-flex align-items-center text-decoration-none">
+                <img src="{% static 'img/cnd.gif' %}" alt="CND Maroc" height="50">
+                <div class="ms-3 d-none d-md-block">
+                    <span class="d-block fs-6 text-muted"></span>
+                    <span class="d-block fs-5 fw-bold text-primary"></span>
+                </div>
+            </a>
+            <div class="d-flex gap-3">
+                <a href="/collecte/" class="btn btn-light btn-lg px-4">Collecte</a>
+                <a href="/gestion/" class="btn btn-light btn-lg px-4">Gestion</a>
+                <a href="/bilan/" class="btn btn-light btn-lg px-4">Bilan</a>
+            </div>
+            <nav></nav>
+            
+            <nav class="d-flex">
+                <a href="/recherche" class="btn btn-sm btn-outline-primary me">
+                    <i class="fas fa-search me-1"></i> Recherche
+                </a>
+            </nav>
+        </div>
+    </div>
+</header>

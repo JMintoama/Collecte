@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- templates/collecte/home.html -->
-    {% extends "base.html" %}
-    {% block content %}
+
+{% extends 'base.html' %}
+
+{% block title %}Collecte de Documents | CND{% endblock %}
+
+{% block content %}
+<section class="my-4">
+    <h1 class="display-5 text-primary">Base de Données Collecte</h1>
+    <!-- Votre contenu ici -->
+</section>
+
+<nav>
+        <a href="{% url 'periodique' %}">Périodique</a>
+        <a href="{% url 'monographique' %}">Monographique</a>
+        <a href="{% url 'indexeur' %}">Indexeur</a>
+        <a href="{% url 'indexation' %}">Indexation</a>
+        <a href="{% url 'controle' %}">Controle</a>
+        <a href="{% url 'vue' %}">Prise de vue</a>
+    </nav>
     <h2>Faire un enregistrement</h2>
     <ul>
         <li><a href="{% url 'ajouter_collecte' %}">Ajouter</a></li>
     </ul>
-    {% endblock %}
 
-</body>
-</html>
+{% endblock %}

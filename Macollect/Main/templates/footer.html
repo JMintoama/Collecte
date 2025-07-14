@@ -1,0 +1,35 @@
+{% load static %}
+<footer class="bg-dark text-white py-5 mt-auto">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <img src="{% static 'img/cnd.gif' %}" alt="CND" height="40">
+                <address class="mt-3 small">
+                    <p>Centre National de Documentation<br>
+                    Haut Commissariat au Plan<br>
+                    Avenue XXXXX, Rabat</p>
+                </address>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h3 class="h6 text-uppercase">Liens utiles</h3>
+                <ul class="nav flex-column small">
+                    <li class="nav-item"><a href="/plan-site" class="nav-link ps-0">Plan du site</a></li>
+                    <li class="nav-item"><a href="/mentions-legales" class="nav-link ps-0">Mentions légales</a></li>
+                    <li class="nav-item"><a href="/accessibilite" class="nav-link ps-0">Accessibilité</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h3 class="h6 text-uppercase">Nous contacter</h3>
+                <ul class="nav flex-column small">
+                    <li class="nav-item"><a href="mailto:contact@cnd.ma" class="nav-link ps-0"><i class="fas fa-envelope me-2"></i> contact@cnd.ma</a></li>
+                    <li class="nav-item"><a href="tel:+212537000000" class="nav-link ps-0"><i class="fas fa-phone me-2"></i> +212 5 37 00 00 00</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="my-4 bg-secondary">
+        <div class="text-center small">
+            <p>© {% now 'Y' %} Centre National de Documentation - Tous droits réservés</p>
+            <p class="text-muted">Version 1.0.0</p>
+        </div>
+    </div>
+</footer>

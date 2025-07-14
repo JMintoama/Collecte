@@ -1,0 +1,23 @@
+:root {
+    --cnd-blue: #003366;
+    --cnd-gold: #D4AF37;
+}
+
+/* Navigation */
+.navbar {
+    border-bottom: 3px solid var(--cnd-gold);
+}
+
+.nav-link:hover {
+    color: var(--cnd-gold) !important;
+}
+
+/* Footer */
+footer a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: var(--cnd-gold) !important;
+}

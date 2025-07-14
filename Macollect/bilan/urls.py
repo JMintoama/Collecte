@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.bilan_home, name='bilan_home'),
-    # Add more URL patterns as needed for the collecte app
+    path('documents/', views.doc_list, name='doc_list'),
+    path('etablissements/', views.etablishment_list, name='establishment_list'),
 ]
+
