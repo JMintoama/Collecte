@@ -4,22 +4,18 @@
 {% block title %}Collecte de Documents | CND{% endblock %}
 
 {% block content %}
-<section class="my-4">
-    <h1 class="display-5 text-primary">Base de Données Collecte</h1>
+<section class="my-4:center">
+    <h2 class="display-5 text-primary">Partie réserver à l'administration. Choisissez l'option qui vous convient et identifiez-vous!</h2>
     <!-- Votre contenu ici -->
 </section>
 
 <nav>
-        <a href="{% url 'periodique' %}">Périodique</a>
-        <a href="{% url 'monographique' %}">Monographique</a>
-        <a href="{% url 'indexeur' %}">Indexeur</a>
-        <a href="{% url 'indexation' %}">Indexation</a>
-        <a href="{% url 'controle' %}">Controle</a>
-        <a href="{% url 'vue' %}">Prise de vue</a>
-    </nav>
-    <h2>Faire un enregistrement</h2>
-    <ul>
-        <li><a href="{% url 'ajouter_collecte' %}">Ajouter</a></li>
-    </ul>
-
+    <a href="{% url 'periodique' %}">Périodique</a>
+    <a href="{% url 'monographique' %}">Monographique</a>
+    <a href="{% url 'indexeur' %}">Indexeur</a>
+    <a href="{% url 'indexation' %}">Indexation</a>
+    <a href="{% url 'controle' %}">Controle</a>
+    <a href="{% url 'vue' %}">Prise de vue</a>
+</nav>
+    
 {% endblock %}
