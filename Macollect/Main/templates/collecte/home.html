@@ -4,18 +4,42 @@
 {% block title %}Collecte de Documents | CND{% endblock %}
 
 {% block content %}
-<section class="my-4:center">
-    <h2 class="display-5 text-primary">Partie réserver à l'administration. Choisissez l'option qui vous convient et identifiez-vous!</h2>
-    <!-- Votre contenu ici -->
-</section>
 
-<nav>
-    <a href="{% url 'periodique' %}">Périodique</a>
-    <a href="{% url 'monographique' %}">Monographique</a>
-    <a href="{% url 'indexeur' %}">Indexeur</a>
-    <a href="{% url 'indexation' %}">Indexation</a>
-    <a href="{% url 'controle' %}">Controle</a>
-    <a href="{% url 'vue' %}">Prise de vue</a>
-</nav>
+<h1 class="text-center text-primary mb-4">
+  <i class="bi bi-folder-symlink"></i> Collecte de Documents
+</h1>
+
+
+{% if user.is_authenticated %}
+    <div class="alert alert-success" role="alert">
+    Bienvenue, {{ user.username }}! Vous êtes connecté en tant qu'administrateur.
+    Choisissez l'option qui vous convient et identifiez-vous!
+    </div>
+    <nav class="d-flex flex-wrap gap-3 justify-content-center my-4">
+    <a href="{% url 'periodique' %}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-journal-text me-2"></i> Périodique
+    </a>
+    <a href="{% url 'monographique' %}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-book me-2"></i> Monographique
+    </a>
+    <a href="{% url 'indexeur' %}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-list-check me-2"></i> Indexeur
+    </a>
+    <a href="{% url 'indexation' %}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-tags me-2"></i> Indexation
+    </a>
+    <a href="{% url 'controle' %}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-shield-check me-2"></i> Contrôle
+    </a>
+    <a href="{% url 'vue' %}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-camera me-2"></i> Prise de vue
+    </a>
+    </nav>
+{% else %}
+    <div class="alert alert-warning">
+        Vous devez être connecté pour accéder à cette section.
+    </div>
+    <a href="{% url 'login' %}" class="btn btn-primary">Connexion</a>
+{% endif %}
     
 {% endblock %}

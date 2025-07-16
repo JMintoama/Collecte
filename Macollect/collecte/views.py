@@ -3,6 +3,126 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+from django.shortcuts import render, redirect
+from gestion.models import Admin
+from .utils import admin_required
+
+# === Login views ===
+
+def login_view(request, destination):
+    error = None
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            admin_user = Admin.objects.get(login=username, pass_field=password, destination=destination)
+            request.session['admin_logged_in'] = True
+            request.session['destination'] = destination
+            return redirect(f'/collecte/{destination.lower()}/')
+        except Admin.DoesNotExist:
+            error = "Identifiants incorrects ou accès non autorisé."
+
+    return render(request, 'collecte/login.html', {'error': error, 'destination': destination})
+
+def login_periodique(request):
+    return login_view(request, 'Periodique')
+
+def login_monographie(request):
+    return login_view(request, 'Monographie')
+
+def login_indexeur(request):
+    return login_view(request, 'Indexeur')
+
+from django.shortcuts import render, redirect
+from gestion.models import Admin
+from django.utils import admin_required
+
+# === Login views ===
+
+def login_view(request, destination):
+    error = None
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            admin_user = Admin.objects.get(login=username, pass_field=password, destination=destination)
+            request.session['admin_logged_in'] = True
+            request.session['destination'] = destination
+            return redirect(f'/collecte/{destination.lower()}/')
+        except Admin.DoesNotExist:
+            error = "Identifiants incorrects ou accès non autorisé."
+
+    return render(request, 'collecte/login.html', {'error': error, 'destination': destination})
+
+def login_periodique(request):
+    return login_view(request, 'Periodique')
+
+def login_monographie(request):
+    return login_view(request, 'Monographie')
+
+def login_indexeur(request):
+    return login_view(request, 'Indexeur')
+
+def login_indexation(request):
+    return login_view(request, 'Indexation')
+
+def login_controle(request):
+    return login_view(request, 'Controle')
+
+def login_prisevue(request):
+    return login_view(request, 'vue')
+
+# === Protected home views ===
+
+@admin_required('Periodique')
+def periodique(request):
+    return render(request, 'collecte/periodique.html')
+
+@admin_required('Monographie')
+def monographie(request):
+    return render(request, 'collecte/monographie.html')
+
+@admin_required('Indexeur')
+def indexeur(request):
+    return render(request, 'collecte/indexeur.html')
+
+@admin_required('Controle')
+def indexation(request):
+    return render(request, 'collecte/indexation.html')
+
+@admin_required('vue')
+def prisevue(request):
+    return render(request, 'collecte/vue.html')
+
+def login_prisevue(request):
+    return login_view(request, 'vue')
+
+# === Protected home views ===
+
+@admin_required('Periodique')
+def periodique(request):
+    return render(request, 'collecte/periodique.html')
+
+@admin_required('Monographie')
+def monographie(request):
+    return render(request, 'collecte/monographie.html')
+
+@admin_required('Indexeur')
+def indexeur(request):
+    return render(request, 'collecte/indexeur.html')
+
+@admin_required('Indexation')
+def indexation(request):
+    return render(request, 'collecte/indexation.html')
+
+@admin_required('vue')
+def prisevue(request):
+    return render(request, 'collecte/vue.html')
+
+
 def collecte_home(request):
     """
     View function for the home page of the Collecte app.
@@ -25,46 +145,3 @@ def ajouter_collecte(request):
         form = CollecteForm()
     
     return render(request, 'collecte/ajouter.html', {'form': form})
-
-def periodique(request):
-    """
-    View function to handle periodic data collection.
-    """
-    # Logic for periodic data collection can be added here
-    return render(request, 'collecte/periodique.html')
-
-def monographique(request):
-    """
-    View function to handle monographic data collection.
-    """
-    # Logic for monographic data collection can be added here
-    return render(request, 'collecte/monographique.html')
-
-def indexeur(request):
-    """
-    View function to handle indexing of data.
-    """
-    # Logic for indexing data can be added here
-    return render(request, 'collecte/indexeur.html')
-
-def indexation(request):
-    """
-    View function to handle the indexing of collected data.
-    """
-    # Logic for indexing collected data can be added here
-    return render(request, 'collecte/indexation.html')
-
-def controle(request):
-    """
-    View function to handle the control of collected data.
-    """
-    # Logic for controlling collected data can be added here
-    return render(request, 'collecte/controle.html')
-
-def vue(request):
-    """
-    View function to handle the view of collected data.
-    """
-    # Logic for viewing collected data can be added here
-    return render(request, 'collecte/vue.html')
-
